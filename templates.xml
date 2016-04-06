@@ -32,6 +32,153 @@
                 <xpath expr="//field[@name='origin']" position="after">
                     <field name="job_type_mrp"/>
                 </xpath>
+                <xpath expr="//page[@string='Extra Information']" position="after">
+                    <page string="Lamination" name="mrp_lamination" attrs="{'invisible': [('bom_id','=', False)]}">
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="mo_lamination_type" />
+                                <field name="mo_type_of_varnish" attrs="{'invisible': [('mo_lamination_type','!=', 'varnish')]}"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="mo_salofeen_width"/>
+                                <field name="mo_salofeen_height"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+                <xpath expr="//page[@string='Lamination']" position="after">
+                    <page string="Folding/Gluing" name="folding_gluing" attrs="{'invisible': [('bom_id','=', False)]}">
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="mo_paste_materials"/>
+                                <field name="mo_mrp_side_dropdown"/>
+                                <field name="mo_mrp_crush"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="mo_type_of_varnish" attrs="{'invisible': [('mo_lamination_type','!=', 'varnish')]}"/>
+                                <field name="mo_mrp_pins"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+                
+                <xpath expr="//page[@string='Folding/Gluing']" position="after">
+                    <page string="Size" name="size" attrs="{'invisible': [('bom_id','=', False)]}">
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="mo_mrp_reel"/>
+                                <field name="mo_mrp_cutting"/>
+                                <field name="mo_mrp_cut_width"/>
+                                <field name="mo_mrp_cut_height"/>
+                                <field name="mo_mrp_filter"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="mo_mrp_type"/>
+                                <field name="mo_mrp_grams"/>
+                                <field name="mo_mrp_fac"/>
+                                <field name="mo_mrp_nos"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+                <xpath expr="//page[@string='Size']" position="after">
+                    <page string="Printed sheet" name="printed_sheet" attrs="{'invisible': [('bom_id','=', False)]}">
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="mo_p_mrp_nos"/>
+                                <field name="mo_p_mrp_filter"/>
+                                <field name="mo_p_mrp_ups"/>
+                                <field name="mo_mrp_cut_height"/>
+                                <field name="mo_p_mrp_brand"/>
+                            </group>
+                            <group name="group_right">
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+                <xpath expr="//page[@string='Printed sheet']" position="after">
+                    <page string="Process" name="process" attrs="{'invisible': [('bom_id','=', False)]}">
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="mo_mrp_machine"/>
+                                <field name="mo_mrp_grip"/>
+                            </group>
+                            <group name="group_right">
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+                <xpath expr="//page[@string='Process']" position="after">
+                    <page string="Color" name="color" attrs="{'invisible': [('bom_id','=', False)]}">
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="mo_mrp_color"/>
+                                <field name="mo_mrp_quantity"/>
+                                <field name="mo_mrp_remarks"/>
+                            </group>
+                            <group name="group_right">
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+                <xpath expr="//page[@string='Color']" position="after">
+                    <page string="Remarks" name="remarks" attrs="{'invisible': [('bom_id','=', False)]}">
+                        <field name="mo_mrp_remarks_description" nolabel='1' placeholder="Add Your Remarks Here ...!"/>
+                    </page>
+                </xpath>
+                <xpath expr="//page[@string='Remarks']" position="after">
+                    <page string="Cutting Creasing" name="cutting_creasing" attrs="{'invisible': [('bom_id','=', False)]}">
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="mo_mrp_die_number"/>
+                                <field name="mo_mrp_die_type"/>
+                                <field name="mo_mrp_die_loc" />
+                            </group>
+                        </group>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="mo_mrp_foiling"/>
+                                <field name="mo_mrp_rotry_salt"/>
+                                <field name="mo_mrp_screen"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="mo_mrp_imbosing"/>
+                                <field name="mo_mrp_guilotine"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+                <xpath expr="//page[@string= 'Cutting Creasing']" position="after">
+                    <page string="Corrugation" name="corrugation" attrs="{'invisible': [('bom_id','=', False)]}">
+                        <group name="group_top" string="Sheet Size">
+                            <group name="group_left">
+                                <field name="mo_mrp_reel_size"/>
+                                <field name="mo_mrp_cutting_size"/>
+                                <field name="mo_mrp_fact"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="mo_mrp_pcs"/>
+                                <field name="mo_mrp_ply"/>
+                                <field name="mo_mrp_act_reel_size"/>
+                            </group>
+                        </group>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="mo_mrp_ups_desc"/>
+                                <field name="mo_mrp_part_desc"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="mo_mrp_sheets_qty"/>
+                                <field name="mo_mrp_job_qty"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
             </field>
         </record>
 
@@ -41,28 +188,22 @@
             <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
             <field name="type">form</field>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='product_qty']" position="after">
-                    <field name="lamination_type" string="Type of Lamination"/>
-                    <field name="type_of_varnish" attrs="{'invisible': [('lamination_type','!=', 'varnish')]}"/>
-                </xpath>
-                <!--<xpath expr="//page[@string='Properties']" position="after">
+                <xpath expr="//page[@string='Properties']" position="after">
                     <page string="Lamination" name="mrp_lamination">
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="mrp_mat"/>
-                                <field name="mrp_glass"/>
-                                <field name="mrp_varnish"/>
+                                <field name="lamination_type" />
+                                <field name="type_of_varnish" attrs="{'invisible': [('lamination_type','!=', 'varnish')]}"/>
                             </group>
                             <group name="group_right">
-                                <field name="type_of_varnish" attrs="{'invisible': [('mrp_varnish','!=', True)]}"/>
                                 <field name="salofeen_width"/>
                                 <field name="salofeen_height"/>
                             </group>
                         </group>
                     </page>
-                </xpath>-->
+                </xpath>
 
-                <xpath expr="//page[@string='Properties']" position="after">
+                <xpath expr="//page[@string='Lamination']" position="after">
                     <page string="Folding/Gluing" name="folding_gluing">
                         <group name="group_top">
                             <group name="group_left">
@@ -151,6 +292,7 @@
                             <group name="group_left">
                                 <field name="mrp_die_number"/>
                                 <field name="mrp_die_type"/>
+                                <field name="mrp_die_loc" />
                             </group>
                         </group>
                         <group name="group_top">
@@ -198,6 +340,7 @@
                                 <field name="w_Sheet"/>
                                 <field name="line_type"/>
                                 <field name="req_weight"/>
+                                <field name="brand"/>
                             </tree>
                         </field>
                     </page>
