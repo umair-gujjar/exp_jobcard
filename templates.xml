@@ -31,6 +31,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='origin']" position="after">
                     <field name="job_type_mrp"/>
+                    <field name="bom_id_for_change" attrs="{'invisible': True}"/>
                 </xpath>
                 <xpath expr="//page[@string='Extra Information']" position="after">
                     <page string="Lamination" name="mrp_lamination" attrs="{'invisible': [('bom_id','=', False)]}">
@@ -176,6 +177,30 @@
                                 <field name="mo_mrp_sheets_qty"/>
                                 <field name="mo_mrp_job_qty"/>
                             </group>
+                        </group>
+                        <field name="mo_workbook_one_ids" nolabel='1'>
+                            <tree editable="bottom">
+                                <field name="material"/>
+                                <field name="grams"/>
+                                <field name="w_Sheet"/>
+                                <field name="line_type"/>
+                                <field name="req_weight"/>
+                                <field name="brand"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+                <xpath expr="//page[@string='Corrugation']" position="after">
+                    <page string="Rolls Required" name="rolls_required" attrs="{'invisible': [('bom_id','=', False)]}">
+                        <group name="group_top">
+                            <field name="mo_workbook_two_ids" nolabel='1'>
+                                <tree editable="bottom">
+                                    <field name="material"/>
+                                    <field name="flute"/>
+                                    <field name="reel_size"/>
+                                    <field name="required_quantity"/>
+                                </tree>
+                            </field>
                         </group>
                     </page>
                 </xpath>
