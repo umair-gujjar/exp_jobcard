@@ -42,7 +42,7 @@ class mrp_custom_expert(models.Model):
             ('a', 'A'),
             ('b', 'B'),
             ],default='', string="Crush")
-	mo_mrp_pins = fields.Integer(string='Pins')
+	mo_mrp_pins = fields.Char(string='Pins')
 	mo_mrp_reel = fields.Float(string='Reel')
 	mo_mrp_cutting = fields.Float(string='Cutting')
 	mo_mrp_cut_width = fields.Float(string='Cut Width')
@@ -57,14 +57,14 @@ class mrp_custom_expert(models.Model):
 	mo_mrp_filter = fields.Char(string='Filter')
 	mo_p_mrp_nos = fields.Float(string='Nos')
 	mo_p_mrp_filter = fields.Char(string='Filter')
-	mo_p_mrp_ups = fields.Integer(string='UPS')
+	mo_p_mrp_ups = fields.Char(string='UPS')
 	mo_p_mrp_brand = fields.Char(string='Brand')
 
 	mo_mrp_machine = fields.Char(string='Machine')
 	mo_mrp_grip = fields.Char(string='Grip')
 	mo_mrp_color = fields.Char(string='Color')
 	mo_mrp_quantity = fields.Float(string='Quantity')
-	mo_mrp_remarks = fields.Float(string='Remarks')
+	mo_mrp_remarks = fields.Text(string='Remarks')
 	mo_mrp_remarks_description = fields.Text(string='Remarks')
 	mo_mrp_die_number = fields.Char(string='Die Number')
 	mo_mrp_die_type = fields.Selection([
@@ -247,7 +247,7 @@ class mrp_bom_custom_expert(models.Model):
             ('a', 'A'),
             ('b', 'B'),
             ],default='', string="Crush")
-	mrp_pins = fields.Integer(string='Pins')
+	mrp_pins = fields.Char(string='Pins')
 	mrp_reel = fields.Float(string='Reel')
 	mrp_cutting = fields.Float(string='Cutting')
 	mrp_cut_width = fields.Float(string='Cut Width')
@@ -262,14 +262,14 @@ class mrp_bom_custom_expert(models.Model):
 	mrp_filter = fields.Char(string='Filter')
 	p_mrp_nos = fields.Float(string='Nos')
 	p_mrp_filter = fields.Char(string='Filter')
-	p_mrp_ups = fields.Integer(string='UPS')
+	p_mrp_ups = fields.Char(string='UPS')
 	p_mrp_brand = fields.Char(string='Brand')
 
 	mrp_machine = fields.Char(string='Machine')
 	mrp_grip = fields.Char(string='Grip')
 	mrp_color = fields.Char(string='Color')
 	mrp_quantity = fields.Float(string='Quantity')
-	mrp_remarks = fields.Float(string='Remarks')
+	mrp_remarks = fields.Text(string='Remarks')
 	mrp_remarks_description = fields.Text(string='Remarks')
 	mrp_die_number = fields.Char(string='Die Number')
 	mrp_die_type = fields.Selection([
