@@ -195,7 +195,7 @@ class mrp_custom_expert(models.Model):
 			}
 		return data
 
-class mrp_bom_custom_expert_workbook_one(models.Model):
+class mo_mrp_bom_custom_expert_workbook_one(models.Model):
 	_name = 'mo_workbook_one'
 	brand = fields.Char(string='Brand')
 	material = fields.Char(string='Material')
@@ -206,15 +206,15 @@ class mrp_bom_custom_expert_workbook_one(models.Model):
             ('b', 'Paper'),
             ],default='', string="Line Type")
 	req_weight = fields.Char(string='Req Weight')
-	mo_workbook_one_id = fields.Many2one('mrp.bom','Work Book Id')
+	mo_workbook_one_id = fields.Many2one('mrp.production','Work Book Id')
 
-class mrp_bom_custom_expert_workbook_two(models.Model):
+class mo_mrp_bom_custom_expert_workbook_two(models.Model):
 	_name = 'mo_workbook_two'
 	material = fields.Char(string='Material')
 	flute = fields.Char(string='Flute')
 	reel_size = fields.Float(string='Reel Size')
 	required_quantity  = fields.Float(string='Required Quantity')
-	mo_workbook_two_id = fields.Many2one('mrp.bom','Work Book Id')
+	mo_workbook_two_id = fields.Many2one('mrp.production','Work Book Id')
 
 
 
