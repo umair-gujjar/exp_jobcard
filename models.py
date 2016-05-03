@@ -18,29 +18,35 @@ class mrp_custom_expert(models.Model):
 	mo_lamination_type = fields.Selection([
             ('mat', 'MAT'),
             ('glass', 'Glass'),
-            ('varnish', 'Varnish'),
+            ('heatsealable', 'Heat Sealable'),
+            ('metalize', 'Metalize'),
             ],default='', string="Type of Lamination")
 
 	mo_mrp_mat = fields.Boolean(string='Mat')
 	mo_mrp_glass = fields.Boolean(string='Glass')
 	mo_mrp_varnish = fields.Boolean(string='Varnish')
 	mo_type_of_varnish = fields.Selection([
-            ('a', 'A'),
-            ('b', 'B'),
+            ('op varnish', 'Op Varnish'),
+            ('waterbase varnish', 'Waterbase Varnish'),
+            ('uv varnish', 'UV Varnish'),
+            ('spot varnish', 'Spot Varnish'),
             ],default='', string="Type of Varnish")
 	mo_salofeen_width = fields.Char(string='Salofeen Width')
 	mo_salofeen_height = fields.Char(string='Salofeen Height')
+	mo_lamination_width = fields.Char(string='Lamination Width')
+	mo_lamination_height = fields.Char(string='Lamination Height')
+	mo_qty_lamination_reel = fields.Char(string='Qty of Lamination Reel')
 	mo_paste_materials = fields.Selection([
-            ('a', 'A'),
-            ('b', 'B'),
+            ('glue', 'Glue'),
+            ('sodium silicate', 'Sodium Silicate'),
             ],default='', string="Paste Material")
 	mo_mrp_side_dropdown = fields.Selection([
             ('a', 'By Hand'),
             ('b', 'By Machine'),
             ],default='', string="Side")
 	mo_mrp_crush = fields.Selection([
-            ('a', 'A'),
-            ('b', 'B'),
+            ('a', 'By Hand'),
+            ('b', 'By Machine'),
             ],default='', string="Crush")
 	mo_mrp_pins = fields.Char(string='Pins')
 	mo_mrp_reel = fields.Float(string='Reel')
@@ -145,7 +151,7 @@ class mrp_custom_expert(models.Model):
 								'mo_mrp_job_qty' : all_mrp_prd_recs.mrp_job_qty,
 								'bom_id_for_change' : bom_id,
 								#'mo_workbook_two_ids[0].material' : all_mrp_prd_recs.workbook_two_ids.material,
-                }
+                			}
                 }
 	@api.onchange('bom_id_for_change')
 	def onchange_mo_mrp_reel_size(self):
@@ -223,29 +229,35 @@ class mrp_bom_custom_expert(models.Model):
 	lamination_type = fields.Selection([
             ('mat', 'MAT'),
             ('glass', 'Glass'),
-            ('varnish', 'Varnish'),
+            ('heatsealable', 'Heat Sealable'),
+            ('metalize', 'Metalize'),
             ],default='', string="Type of Lamination")
 
 	mrp_mat = fields.Boolean(string='Mat')
 	mrp_glass = fields.Boolean(string='Glass')
 	mrp_varnish = fields.Boolean(string='Varnish')
 	type_of_varnish = fields.Selection([
-            ('a', 'A'),
-            ('b', 'B'),
+            ('op varnish', 'Op Varnish'),
+            ('waterbase varnish', 'Waterbase Varnish'),
+            ('uv varnish', 'UV Varnish'),
+            ('spot varnish', 'Spot Varnish'),
             ],default='', string="Type of Varnish")
 	salofeen_width = fields.Char(string='Salofeen Width')
 	salofeen_height = fields.Char(string='Salofeen Height')
+	lamination_width = fields.Char(string='Lamination Width')
+	lamination_height = fields.Char(string='Lamination Height')
+	qty_lamination_reel = fields.Char(string='Qty of Lamination Reel')
 	paste_materials = fields.Selection([
-            ('a', 'A'),
-            ('b', 'B'),
+            ('glue', 'Glue'),
+            ('sodium silicate', 'Sodium Silicate'),
             ],default='', string="Paste Material")
 	mrp_side_dropdown = fields.Selection([
             ('a', 'By Hand'),
             ('b', 'By Machine'),
             ],default='', string="Side")
 	mrp_crush = fields.Selection([
-            ('a', 'A'),
-            ('b', 'B'),
+            ('a', 'By Hand'),
+            ('b', 'By Machine'),
             ],default='', string="Crush")
 	mrp_pins = fields.Char(string='Pins')
 	mrp_reel = fields.Float(string='Reel')
