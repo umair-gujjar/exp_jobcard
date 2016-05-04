@@ -39,10 +39,13 @@
                             <group name="group_left">
                                 <field name="mo_lamination_type" />
                                 <field name="mo_type_of_varnish" />
+                                <field name="mo_lamination_width" />
+                                <field name="mo_lamination_height" />
                             </group>
                             <group name="group_right">
                                 <field name="mo_salofeen_width"/>
                                 <field name="mo_salofeen_height"/>
+                                <field name="mo_qty_lamination_reel" />
                             </group>
                         </group>
                     </page>
@@ -57,6 +60,7 @@
                                 <field name="mo_mrp_crush"/>
                             </group>
                             <group name="group_right">
+                               
                                 <field name="mo_mrp_pins"/>
                             </group>
                         </group>
@@ -64,41 +68,31 @@
                 </xpath>
                 
                 <xpath expr="//page[@string='Folding/Gluing']" position="after">
-                    <page string="Size" name="size" attrs="{'invisible': [('bom_id','=', False)]}">
+                    <page string="Paper/Board" name="paperboard" attrs="{'invisible': [('bom_id','=', False)]}">
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="mo_mrp_reel"/>
-                                <field name="mo_mrp_cutting"/>
-                                <field name="mo_mrp_cut_width"/>
-                                <field name="mo_mrp_cut_height"/>
-                                <field name="mo_mrp_filter"/>
-                            </group>
-                            <group name="group_right">
-                                <field name="mo_mrp_type"/>
-                                <field name="mo_mrp_grams"/>
-                                <field name="mo_mrp_fac"/>
-                                <field name="mo_mrp_nos"/>
+                                <field name="wrkbk_three_ids" nolabel="1">
+                                    <tree editable="bottom">
+                                        <field name="mrp_reel"/>
+                                        <field name="mrp_cutting"/>
+                                        <field name="mrp_cut_width"/>
+                                        <field name="mrp_cut_height"/>
+                                        <field name="mrp_filter"/>
+                                        <field name="mrp_type"/>
+                                        <field name="mrp_grams"/>
+                                        <field name="mrp_fac"/>
+                                        <field name="mrp_nos"/>
+                                        <field name="p_mrp_nos"/>
+                                        <field name="p_mrp_filter"/>
+                                        <field name="p_mrp_ups"/>
+                                        <field name="p_mrp_brand"/>
+                                    </tree>
+                                </field>
                             </group>
                         </group>
                     </page>
                 </xpath>
-                <xpath expr="//page[@string='Size']" position="after">
-                    <page string="Printed sheet" name="printed_sheet" attrs="{'invisible': [('bom_id','=', False)]}">
-                        <group name="group_top">
-                            <group name="group_left">
-                                <field name="mo_p_mrp_nos"/>
-                                <field name="mo_p_mrp_filter"/>
-                                <field name="mo_p_mrp_ups"/>
-                                <field name="mo_mrp_cut_height"/>
-                                <field name="mo_p_mrp_brand"/>
-                            </group>
-                            <group name="group_right">
-                            </group>
-                        </group>
-                    </page>
-                </xpath>
-
-                <xpath expr="//page[@string='Printed sheet']" position="after">
+                <xpath expr="//page[@string='Paper/Board']" position="after">
                     <page string="Process" name="process" attrs="{'invisible': [('bom_id','=', False)]}">
                         <group name="group_top">
                             <group name="group_left">
@@ -114,13 +108,14 @@
                 <xpath expr="//page[@string='Process']" position="after">
                     <page string="Color" name="color" attrs="{'invisible': [('bom_id','=', False)]}">
                         <group name="group_top">
-                            <group name="group_left">
-                                <field name="mo_mrp_color"/>
-                                <field name="mo_mrp_quantity"/>
-                                <field name="mo_mrp_remarks"/>
-                            </group>
-                            <group name="group_right">
-                            </group>
+                                <field name="wrkbk_color_ids" nolabel='1'>
+                                    <tree editable="bottom">
+                                        <field name="mrp_color"/>
+                                        <field name="mrp_quantity"/>
+                                        <field name="mrp_remarks"/>
+                                        <field name="side"/>
+                                    </tree>
+                                </field>
                         </group>
                     </page>
                 </xpath>
@@ -217,11 +212,14 @@
                         <group name="group_top">
                             <group name="group_left">
                                 <field name="lamination_type" />
-                                <field name="type_of_varnish" />
+                                <field name="type_of_varnish"/>
+                                <field name="lamination_width" />
+                                <field name="lamination_height"/>
                             </group>
                             <group name="group_right">
                                 <field name="salofeen_width"/>
                                 <field name="salofeen_height"/>
+                                <field name="qty_lamination_reel" />
                             </group>
                         </group>
                     </page>
@@ -236,6 +234,7 @@
                                 <field name="mrp_crush"/>
                             </group>
                             <group name="group_right">
+                                
                                 <field name="mrp_pins"/>
                             </group>
                         </group>
@@ -243,41 +242,32 @@
                 </xpath>
                 
                 <xpath expr="//page[@string='Folding/Gluing']" position="after">
-                    <page string="Size" name="size">
+                    <page string="Paper/Board" name="size">
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="mrp_reel"/>
-                                <field name="mrp_cutting"/>
-                                <field name="mrp_cut_width"/>
-                                <field name="mrp_cut_height"/>
-                                <field name="mrp_filter"/>
-                            </group>
-                            <group name="group_right">
-                                <field name="mrp_type"/>
-                                <field name="mrp_grams"/>
-                                <field name="mrp_fac"/>
-                                <field name="mrp_nos"/>
-                            </group>
-                        </group>
-                    </page>
-                </xpath>
-                <xpath expr="//page[@string='Size']" position="after">
-                    <page string="Printed sheet" name="printed_sheet">
-                        <group name="group_top">
-                            <group name="group_left">
-                                <field name="p_mrp_nos"/>
-                                <field name="p_mrp_filter"/>
-                                <field name="p_mrp_ups"/>
-                                <field name="mrp_cut_height"/>
-                                <field name="p_mrp_brand"/>
-                            </group>
-                            <group name="group_right">
-                            </group>
-                        </group>
-                    </page>
-                </xpath>
 
-                <xpath expr="//page[@string='Printed sheet']" position="after">
+                                <field name="wrkbk_four_ids" nolabel='1'>
+                                    <tree editable="bottom">
+                                        <field name="mrp_reel"/>
+                                        <field name="mrp_cutting"/>
+                                        <field name="mrp_cut_width"/>
+                                        <field name="mrp_cut_height"/>
+                                        <field name="mrp_filter"/>
+                                        <field name="mrp_type"/>
+                                        <field name="mrp_grams"/>
+                                        <field name="mrp_fac"/>
+                                        <field name="mrp_nos"/>
+                                        <field name="p_mrp_nos"/>
+                                        <field name="p_mrp_filter"/>
+                                        <field name="p_mrp_ups"/>
+                                        <field name="p_mrp_brand"/>
+                                    </tree>
+                                </field>
+                            </group> 
+                        </group>
+                    </page>
+                </xpath>
+                <xpath expr="//page[@string='Paper/Board']" position="after">
                     <page string="Process" name="process">
                         <group name="group_top">
                             <group name="group_left">
@@ -293,13 +283,14 @@
                 <xpath expr="//page[@string='Process']" position="after">
                     <page string="Color" name="color">
                         <group name="group_top">
-                            <group name="group_left">
-                                <field name="mrp_color"/>
-                                <field name="mrp_quantity"/>
-                                <field name="mrp_remarks"/>
-                            </group>
-                            <group name="group_right">
-                            </group>
+                                <field name="wrkbk_color_bom_ids" nolabel='1'>
+                                    <tree editable="bottom">
+                                        <field name="mrp_color"/>
+                                        <field name="mrp_quantity"/>
+                                        <field name="mrp_remarks"/>
+                                        <field name="side"/>
+                                    </tree>
+                                </field>
                         </group>
                     </page>
                 </xpath>
