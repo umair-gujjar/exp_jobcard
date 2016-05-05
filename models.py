@@ -39,6 +39,8 @@ class mrp_custom_expert(models.Model):
 	mo_paste_materials = fields.Selection([
             ('glue', 'Glue'),
 			('sodium silicate', 'Sodium Silicate'),
+			('samadbondwhite', 'SamadBond White'),
+			('samadbondyellow', 'SamadBond Yellow'),
             ],default='', string="Paste Material")
 	mo_mrp_side_dropdown = fields.Selection([
             ('a', 'By Hand'),
@@ -52,12 +54,12 @@ class mrp_custom_expert(models.Model):
 	mo_mrp_machine = fields.Char(string='Machine')
 	mo_mrp_grip = fields.Char(string='Grip')
 	mo_mrp_remarks_description = fields.Text(string='Remarks')
-	mo_mrp_die_number = fields.Char(string='Die Number')
-	mo_mrp_die_type = fields.Selection([
-            ('a', 'Old'),
-            ('b', 'New'),
-            ],default='', string="Die Type")
-	mo_mrp_die_loc = fields.Char(string="Die Location")
+	#mo_mrp_die_number = fields.Char(string='Die Number')
+	#mo_mrp_die_type = fields.Selection([
+    #        ('a', 'Old'),
+    #        ('b', 'New'),
+    #        ],default='', string="Die Type")
+	#mo_mrp_die_loc = fields.Char(string="Die Location")
 	mo_mrp_foiling = fields.Boolean(string='Foiling')
 	mo_mrp_rotry_salt = fields.Boolean(string='Rotry & Salt')
 	mo_mrp_imbosing = fields.Boolean(string='Imbosing')
@@ -77,6 +79,7 @@ class mrp_custom_expert(models.Model):
 	mo_workbook_one_ids = fields.One2many('mo_workbook_one','mo_workbook_one_id')
 	mo_workbook_two_ids = fields.One2many('mo_workbook_two','mo_workbook_two_id')
 	wrkbk_three_ids = fields.One2many('workbook_three_paper_board','wrkbk_three_id')
+	wrkbk_five_ids = fields.One2many('workbook_five_die','wrkbk_five_id')
 	wrkbk_color_ids = fields.One2many('workbook_color_production','wrkbk_production_id')
 	bom_id_for_change = fields.Many2one('mrp.bom','onchange Bom')
 
@@ -97,9 +100,9 @@ class mrp_custom_expert(models.Model):
 								'mo_mrp_machine' : all_mrp_prd_recs.mrp_machine,
 								'mo_mrp_grip' : all_mrp_prd_recs.mrp_grip,
 								'mo_mrp_remarks_description' : all_mrp_prd_recs.mrp_remarks_description,
-								'mo_mrp_die_number' : all_mrp_prd_recs.mrp_die_number,
-								'mo_mrp_die_type' : all_mrp_prd_recs.mrp_die_type,
-								'mo_mrp_die_loc' : all_mrp_prd_recs.mrp_die_loc,
+								#'mo_mrp_die_number' : all_mrp_prd_recs.mrp_die_number,
+								#'mo_mrp_die_type' : all_mrp_prd_recs.mrp_die_type,
+								#'mo_mrp_die_loc' : all_mrp_prd_recs.mrp_die_loc,
 								'mo_mrp_foiling' : all_mrp_prd_recs.mrp_foiling,
 								'mo_mrp_rotry_salt' : all_mrp_prd_recs.mrp_rotry_salt,
 								'mo_mrp_imbosing' : all_mrp_prd_recs.mrp_imbosing,
@@ -132,6 +135,8 @@ class mrp_custom_expert(models.Model):
 		self.wrkbk_three_ids = self._prepare_mo_workbook_three_ids()
 		self.wrkbk_color_ids.unlink()
 		self.wrkbk_color_ids = self._prepare_mo_workbook_color_ids()
+		self.wrkbk_five_ids.unlink()
+		self.wrkbk_five_ids = self._prepare_mo_workbook_five_ids()
 # for corrugation
 	@api.multi
 	def _prepare_mo_workbook_one_ids(self):
@@ -219,6 +224,25 @@ class mrp_custom_expert(models.Model):
 		return data
 
 	@api.multi
+	def _prepare_mo_workbook_five_ids(self):
+		new_data = []
+		for line in self.bom_id.wrkbk_six_ids:
+			data = self._prepare_workbook_five_line(line)
+			new_data.append(data)
+		return new_data
+	@api.multi
+	def _prepare_workbook_five_line(self, data):
+		if self.bom_id.wrkbk_six_ids:
+			data = {
+			'mo_mrp_die_number' : data.mrp_die_number,
+			'mo_mrp_die_type' : data.mrp_die_type,
+			'mo_mrp_die_loc' : data.mrp_die_loc,
+			'mo_mrp_die_remarks' : data.mrp_die_remarks,
+			'mo_mrp_die_as_per' : data.mrp_die_as_per,
+			}
+		return data	
+
+	@api.multi
 	def write(self,values):
 		result =  super(mrp_custom_expert, self).write(values)
 		self.mo_workbook_one_ids.unlink()
@@ -249,7 +273,11 @@ class mrp_bom_custom_expert_workbook_one(models.Model):
 class mrp_bom_custom_expert_workbook_two(models.Model):
 	_name = 'mo_workbook_two'
 	material = fields.Char(string='Material')
-	flute = fields.Char(string='Flute')
+	flute = fields.Selection([
+            ('b', 'B Flute 2.5'),
+            ('e', 'E Flute 1.5'),
+            ('c', 'C Flute 3.5'),
+            ],default='', string="Flute")
 	reel_size = fields.Float(string='Reel Size')
 	required_quantity  = fields.Float(string='Required Quantity')
 	mo_workbook_two_id = fields.Many2one('mrp.production','Work Book Id')
@@ -277,6 +305,21 @@ class workbook_three_paper_board(models.Model):
 	p_mrp_brand = fields.Char(string='Brand')
 	wrkbk_three_id = fields.Many2one('mrp.production','Work Book Id')
 
+
+# Paper board workbook for manifacture order
+class workbook_five_die(models.Model):
+	_name = 'workbook_five_die'
+	mo_mrp_die_number = fields.Char(string='Die Number')
+	mo_mrp_die_type = fields.Selection([
+            ('a', 'Old'),
+            ('b', 'New'),
+            ],default='', string="Die Type")
+	mo_mrp_die_loc = fields.Char(string="Die Location")
+	mo_mrp_die_remarks = fields.Text(string="Remarks")
+	mo_mrp_die_as_per = fields.Char(string="Die as Per")
+	wrkbk_five_id = fields.Many2one('mrp.production','Work Book Id')
+
+
 # Color workbook for manifacture order
 class workbook_color_production(models.Model):
 	_name = 'workbook_color_production'
@@ -284,8 +327,14 @@ class workbook_color_production(models.Model):
 	mrp_quantity = fields.Float(string='Quantity')
 	mrp_remarks = fields.Text(string='Remarks')
 	side = fields.Selection([
-			('a', 'Front'),
-			('b', 'Back'),
+			('sideone', 'Side 1'),
+			('top', 'Top'),
+			('front', 'Front'),
+			('number', 'Number'),
+			('sidetwo', 'Side 2'),
+			('bottom', 'Bottom'),
+			('back', 'Back'),
+			('filter', 'Filter'),
 			],default='', string="Side")
 	wrkbk_production_id = fields.Many2one('mrp.production','Work production Id')
 
@@ -315,6 +364,8 @@ class mrp_bom_custom_expert(models.Model):
 	paste_materials = fields.Selection([
             ('glue', 'Glue'),
 			('sodium silicate', 'Sodium Silicate'),
+			('samadbondwhite', 'SamadBond White'),
+			('samadbondyellow', 'SamadBond Yellow'),
             ],default='', string="Paste Material")
 	mrp_side_dropdown = fields.Selection([
             ('a', 'By Hand'),
@@ -328,12 +379,12 @@ class mrp_bom_custom_expert(models.Model):
 	mrp_machine = fields.Char(string='Machine')
 	mrp_grip = fields.Char(string='Grip')
 	mrp_remarks_description = fields.Text(string='Remarks')
-	mrp_die_number = fields.Char(string='Die Number')
-	mrp_die_type = fields.Selection([
-            ('a', 'Old'),
-            ('b', 'New'),
-            ],default='', string="Die Type")
-	mrp_die_loc = fields.Char(string="Die Location")
+	#mrp_die_number = fields.Char(string='Die Number')
+	#mrp_die_type = fields.Selection([
+    #        ('a', 'Old'),
+    #        ('b', 'New'),
+    #        ],default='', string="Die Type")
+	#mrp_die_loc = fields.Char(string="Die Location")
 	mrp_foiling = fields.Boolean(string='Foiling')
 	mrp_rotry_salt = fields.Boolean(string='Rotry & Salt')
 	mrp_imbosing = fields.Boolean(string='Imbosing')
@@ -353,6 +404,7 @@ class mrp_bom_custom_expert(models.Model):
 	workbook_one_ids = fields.One2many('workbook_one','workbook_one_id')
 	workbook_two_ids = fields.One2many('workbook_two','workbook_two_id')
 	wrkbk_four_ids = fields.One2many('workbook_four_paper_board','wrkbk_four_id')
+	wrkbk_six_ids = fields.One2many('workbook_six_die','wrkbk_six_id')
 	wrkbk_color_bom_ids = fields.One2many('workbook_color_bom','wrkbk_color_id')
 # Corrugation workbook for bill of materials
 class mrp_bom_custom_expert_workbook_one(models.Model):
@@ -371,7 +423,11 @@ class mrp_bom_custom_expert_workbook_one(models.Model):
 class mrp_bom_custom_expert_workbook_two(models.Model):
 	_name = 'workbook_two'
 	material = fields.Char(string='Material')
-	flute = fields.Char(string='Flute')
+	flute = fields.Selection([
+            ('b', 'B Flute 2.5'),
+            ('e', 'E Flute 1.5'),
+            ('c', 'C Flute 3.5'),
+            ],default='', string="Flute")
 	reel_size = fields.Float(string='Reel Size')
 	required_quantity  = fields.Float(string='Required Quantity')
 	workbook_two_id = fields.Many2one('mrp.bom','Work Book Id')
@@ -398,6 +454,18 @@ class workbook_four_paper_board(models.Model):
 	p_mrp_ups = fields.Char(string='UPS')
 	p_mrp_brand = fields.Char(string='Brand')
 	wrkbk_four_id = fields.Many2one('mrp.bom','Work Book Id')
+
+class workbook_six_die(models.Model):
+	_name = 'workbook_six_die'
+	mrp_die_number = fields.Char(string='Die Number')
+	mrp_die_type = fields.Selection([
+            ('a', 'Old'),
+            ('b', 'New'),
+            ],default='', string="Die Type")
+	mrp_die_loc = fields.Char(string="Die Location")
+	mrp_die_remarks = fields.Text(string="Remarks")
+	mrp_die_as_per = fields.Char(string="Die as Per")
+	wrkbk_six_id = fields.Many2one('mrp.bom','Work Book Id')	
 # color workbook for bill of materials
 class workbook_color_bom(models.Model):
 	_name = 'workbook_color_bom'
@@ -405,7 +473,13 @@ class workbook_color_bom(models.Model):
 	mrp_quantity = fields.Float(string='Quantity')
 	mrp_remarks = fields.Text(string='Remarks')
 	side = fields.Selection([
-			('a', 'Front'),
-			('b', 'Back'),
+			('sideone', 'Side 1'),
+			('top', 'Top'),
+			('front', 'Front'),
+			('number', 'Number'),
+			('sidetwo', 'Side 2'),
+			('bottom', 'Bottom'),
+			('back', 'Back'),
+			('filter', 'Filter'),
 			],default='', string="Side")
 	wrkbk_color_id = fields.Many2one('mrp.bom','Work color Id')

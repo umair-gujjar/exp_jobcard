@@ -77,10 +77,10 @@
                                         <field name="mrp_cutting"/>
                                         <field name="mrp_cut_width"/>
                                         <field name="mrp_cut_height"/>
-                                        <field name="mrp_filter"/>
                                         <field name="mrp_type"/>
                                         <field name="mrp_grams"/>
                                         <field name="mrp_fac"/>
+                                        <field name="mrp_filter"/>
                                         <field name="mrp_nos"/>
                                         <field name="p_mrp_nos"/>
                                         <field name="p_mrp_filter"/>
@@ -110,10 +110,10 @@
                         <group name="group_top">
                                 <field name="wrkbk_color_ids" nolabel='1'>
                                     <tree editable="bottom">
+                                        <field name="side"/>
                                         <field name="mrp_color"/>
                                         <field name="mrp_quantity"/>
                                         <field name="mrp_remarks"/>
-                                        <field name="side"/>
                                     </tree>
                                 </field>
                         </group>
@@ -129,9 +129,15 @@
                     <page string="Cutting Creasing" name="cutting_creasing" attrs="{'invisible': [('bom_id','=', False)]}">
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="mo_mrp_die_number"/>
-                                <field name="mo_mrp_die_type"/>
-                                <field name="mo_mrp_die_loc" />
+                                <field name="wrkbk_five_ids" nolabel="1">
+                                    <tree editable="bottom">
+                                        <field name="mo_mrp_die_number"/>
+                                        <field name="mo_mrp_die_type"/>
+                                        <field name="mo_mrp_die_loc"/>
+                                        <field name="mo_mrp_die_remarks"/>
+                                        <field name="mo_mrp_die_as_per"/>
+                                    </tree>
+                                </field>
                             </group>
                         </group>
                         <group name="group_top">
@@ -252,10 +258,10 @@
                                         <field name="mrp_cutting"/>
                                         <field name="mrp_cut_width"/>
                                         <field name="mrp_cut_height"/>
-                                        <field name="mrp_filter"/>
                                         <field name="mrp_type"/>
                                         <field name="mrp_grams"/>
                                         <field name="mrp_fac"/>
+                                        <field name="mrp_filter"/>
                                         <field name="mrp_nos"/>
                                         <field name="p_mrp_nos"/>
                                         <field name="p_mrp_filter"/>
@@ -285,10 +291,10 @@
                         <group name="group_top">
                                 <field name="wrkbk_color_bom_ids" nolabel='1'>
                                     <tree editable="bottom">
+                                        <field name="side"/>
                                         <field name="mrp_color"/>
                                         <field name="mrp_quantity"/>
                                         <field name="mrp_remarks"/>
-                                        <field name="side"/>
                                     </tree>
                                 </field>
                         </group>
@@ -304,9 +310,15 @@
                     <page string="Cutting Creasing" name="cutting_creasing">
                         <group name="group_top">
                             <group name="group_left">
-                                <field name="mrp_die_number"/>
-                                <field name="mrp_die_type"/>
-                                <field name="mrp_die_loc" />
+                                <field name="wrkbk_six_ids" nolabel="1">
+                                    <tree editable="bottom">
+                                        <field name="mrp_die_number"/>
+                                        <field name="mrp_die_type"/>
+                                        <field name="mrp_die_loc"/>
+                                        <field name="mrp_die_remarks"/>
+                                        <field name="mrp_die_as_per"/>
+                                    </tree>
+                                </field>
                             </group>
                         </group>
                         <group name="group_top">
