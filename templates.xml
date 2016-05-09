@@ -156,28 +156,23 @@
 
                 <xpath expr="//page[@string= 'Cutting Creasing']" position="after">
                     <page string="Corrugation" name="corrugation" attrs="{'invisible': [('bom_id','=', False)]}">
-                        <group name="group_top" string="Sheet Size">
-                            <group name="group_left">
+                        <field name="wrbk_corrugation_two" nolabel='1'>
+                            <tree editable="bottom">
                                 <field name="mo_mrp_reel_size"/>
                                 <field name="mo_mrp_cutting_size"/>
                                 <field name="mo_mrp_fact"/>
-                            </group>
-                            <group name="group_right">
                                 <field name="mo_mrp_pcs"/>
                                 <field name="mo_mrp_ply"/>
                                 <field name="mo_mrp_act_reel_size"/>
-                            </group>
-                        </group>
-                        <group name="group_top">
-                            <group name="group_left">
+                                <field name="mo_mrp_prod_length"/>
+                                <field name="mo_mrp_prod_height"/>
+                                <field name="mo_mrp_prod_width"/>
                                 <field name="mo_mrp_ups_desc"/>
                                 <field name="mo_mrp_part_desc"/>
-                            </group>
-                            <group name="group_right">
                                 <field name="mo_mrp_sheets_qty"/>
                                 <field name="mo_mrp_job_qty"/>
-                            </group>
-                        </group>
+                            </tree>
+                        </field>
                         <field name="mo_workbook_one_ids" nolabel='1'>
                             <tree editable="bottom">
                                 <field name="material"/>
@@ -185,6 +180,7 @@
                                 <field name="w_Sheet"/>
                                 <field name="line_type"/>
                                 <field name="req_weight"/>
+                                <field name="part_desc"/>
                                 <field name="brand"/>
                             </tree>
                         </field>
@@ -337,28 +333,23 @@
 
                 <xpath expr="//page[@string= 'Cutting Creasing']" position="after">
                     <page string="Corrugation" name="corrugation">
-                        <group name="group_top" string="Sheet Size">
-                            <group name="group_left">
+                        <field name="workbook_corrugation_ids" nolabel='1'>
+                            <tree editable="bottom">
                                 <field name="mrp_reel_size"/>
                                 <field name="mrp_cutting_size"/>
                                 <field name="mrp_fact"/>
-                            </group>
-                            <group name="group_right">
                                 <field name="mrp_pcs"/>
                                 <field name="mrp_ply"/>
                                 <field name="mrp_act_reel_size"/>
-                            </group>
-                        </group>
-                        <group name="group_top">
-                            <group name="group_left">
+                                <field name="mrp_prod_length"/>
+                                <field name="mrp_prod_height"/>
+                                <field name="mrp_prod_width"/>
                                 <field name="mrp_ups_desc"/>
                                 <field name="mrp_part_desc"/>
-                            </group>
-                            <group name="group_right">
                                 <field name="mrp_sheets_qty"/>
                                 <field name="mrp_job_qty"/>
-                            </group>
-                        </group>
+                            </tree>
+                        </field>
                         <field name="workbook_one_ids" nolabel='1'>
                             <tree editable="bottom">
                                 <field name="material"/>
@@ -366,6 +357,7 @@
                                 <field name="w_Sheet"/>
                                 <field name="line_type"/>
                                 <field name="req_weight"/>
+                                <field name="part_desc"/>
                                 <field name="brand"/>
                             </tree>
                         </field>
