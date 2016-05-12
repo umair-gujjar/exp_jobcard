@@ -149,6 +149,7 @@
                             <group name="group_right">
                                 <field name="mo_mrp_imbosing"/>
                                 <field name="mo_mrp_guilotine"/>
+                                <field name="mo_mrp_cc_qty"/>
                             </group>
                         </group>
                     </page>
@@ -195,6 +196,7 @@
                                     <field name="flute"/>
                                     <field name="reel_size"/>
                                     <field name="required_quantity"/>
+                                    <field name="part_desc"/>
                                 </tree>
                             </field>
                         </group>
@@ -326,6 +328,7 @@
                             <group name="group_right">
                                 <field name="mrp_imbosing"/>
                                 <field name="mrp_guilotine"/>
+                                <field name="mrp_cc_qty"/>
                             </group>
                         </group>
                     </page>
@@ -372,6 +375,7 @@
                                     <field name="flute"/>
                                     <field name="reel_size"/>
                                     <field name="required_quantity"/>
+                                    <field name="part_desc"/>
                                 </tree>
                             </field>
                         </group>
