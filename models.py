@@ -120,7 +120,7 @@ class mrp_custom_expert(models.Model):
 		self.mo_workbook_one_ids.unlink()
 		self.mo_workbook_one_ids = self._prepare_mo_workbook_one_ids()
 		self.wrbk_corrugation_two.unlink()
-		self.wrbk_corrugation_two = self._prepare_mo_workbook_five_ids()
+		self.wrbk_corrugation_two = self._prepare_mo_workbook_corrugation_ids()
 	@api.onchange('bom_id_for_change')
 	def onchange_mo_mrp_pcs(self):
 		self.mo_workbook_two_ids.unlink()
