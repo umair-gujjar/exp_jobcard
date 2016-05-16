@@ -54,18 +54,12 @@ class mrp_custom_expert(models.Model):
 	mo_mrp_machine = fields.Char(string='Machine')
 	mo_mrp_grip = fields.Char(string='Grip')
 	mo_mrp_remarks_description = fields.Text(string='Remarks')
-	#mo_mrp_die_number = fields.Char(string='Die Number')
-	#mo_mrp_die_type = fields.Selection([
-    #        ('a', 'Old'),
-    #        ('b', 'New'),
-    #        ],default='', string="Die Type")
-	#mo_mrp_die_loc = fields.Char(string="Die Location")
 	mo_mrp_foiling = fields.Boolean(string='Foiling')
 	mo_mrp_rotry_salt = fields.Boolean(string='Rotry & Salt')
 	mo_mrp_imbosing = fields.Boolean(string='Imbosing')
 	mo_mrp_guilotine = fields.Boolean(string='Guilotine')
 	mo_mrp_screen = fields.Boolean(string='Screen')
-	mo_mrp_cc_qty = fields.Char(string='C.C Qty')
+	mo_mrp_cc_qty = fields.Boolean(string='C.C Qty')
 	wrbk_corrugation_two = fields.One2many('workbook_corrugation_two','wrkbk_corrugation_id')
 	mo_workbook_one_ids = fields.One2many('mo_workbook_one','mo_workbook_one_id')
 	mo_workbook_two_ids = fields.One2many('mo_workbook_two','mo_workbook_two_id')
@@ -91,27 +85,13 @@ class mrp_custom_expert(models.Model):
 								'mo_mrp_machine' : all_mrp_prd_recs.mrp_machine,
 								'mo_mrp_grip' : all_mrp_prd_recs.mrp_grip,
 								'mo_mrp_remarks_description' : all_mrp_prd_recs.mrp_remarks_description,
-								#'mo_mrp_die_number' : all_mrp_prd_recs.mrp_die_number,
-								#'mo_mrp_die_type' : all_mrp_prd_recs.mrp_die_type,
-								#'mo_mrp_die_loc' : all_mrp_prd_recs.mrp_die_loc,
 								'mo_mrp_foiling' : all_mrp_prd_recs.mrp_foiling,
 								'mo_mrp_rotry_salt' : all_mrp_prd_recs.mrp_rotry_salt,
 								'mo_mrp_imbosing' : all_mrp_prd_recs.mrp_imbosing,
 								'mo_mrp_guilotine' : all_mrp_prd_recs.mrp_guilotine,
 								'mo_mrp_screen' : all_mrp_prd_recs.mrp_screen,
-								'mrp_cc_qty' : all_mrp_prd_recs.mrp_cc_qty,
-								#'mo_mrp_reel_size' : all_mrp_prd_recs.mrp_reel_size,
-								#'mo_mrp_cutting_size' : all_mrp_prd_recs.mrp_cutting_size,
-								#'mo_mrp_fact' : all_mrp_prd_recs.mrp_fact,
-								#'mo_mrp_pcs' : all_mrp_prd_recs.mrp_pcs,
-								#'mo_mrp_ply' : all_mrp_prd_recs.mrp_ply,
-								#'mo_mrp_act_reel_size' : all_mrp_prd_recs.mrp_act_reel_size,
-								#'mo_mrp_ups_desc' : all_mrp_prd_recs.mrp_ups_desc,
-								#'mo_mrp_part_desc' : all_mrp_prd_recs.mrp_part_desc,
-								#'mo_mrp_sheets_qty' : all_mrp_prd_recs.mrp_sheets_qty,
-								#'mo_mrp_job_qty' : all_mrp_prd_recs.mrp_job_qty,
+								'mo_mrp_cc_qty' : all_mrp_prd_recs.mrp_cc_qty,
 								'bom_id_for_change' : bom_id,
-								#'mo_workbook_two_ids[0].material' : all_mrp_prd_recs.workbook_two_ids.material,
                 }
                 }
 
@@ -187,7 +167,6 @@ class mrp_custom_expert(models.Model):
 			'mrp_cutting' : data.mrp_cutting,
 			'mrp_cut_width' : data.mrp_cut_width,
 			'mrp_cut_height' : data.mrp_cut_height,
-			#'mrp_cut_height_printed' : data.mrp_cut_height_printed,
 			'mrp_type' : data.mrp_type,
 			'mrp_grams' : data.mrp_grams,
 			'mrp_fac' : data.mrp_fac,
@@ -333,7 +312,6 @@ class workbook_three_paper_board(models.Model):
 	mrp_cutting = fields.Float(string='Cutting')
 	mrp_cut_width = fields.Float(string='Cut Width')
 	mrp_cut_height = fields.Float(string='Cut Height')
-	#mrp_cut_height_printed = fields.Float(string='Cut Height')
 	mrp_type = fields.Selection([
             ('a', 'Packets'),
             ('b', 'Sheet'),
@@ -450,18 +428,12 @@ class mrp_bom_custom_expert(models.Model):
 	mrp_machine = fields.Char(string='Machine')
 	mrp_grip = fields.Char(string='Grip')
 	mrp_remarks_description = fields.Text(string='Remarks')
-	#mrp_die_number = fields.Char(string='Die Number')
-	#mrp_die_type = fields.Selection([
-    #        ('a', 'Old'),
-    #        ('b', 'New'),
-    #        ],default='', string="Die Type")
-	#mrp_die_loc = fields.Char(string="Die Location")
 	mrp_foiling = fields.Boolean(string='Foiling')
 	mrp_rotry_salt = fields.Boolean(string='Rotry & Salt')
 	mrp_imbosing = fields.Boolean(string='Imbosing')
 	mrp_guilotine = fields.Boolean(string='Guilotine')
 	mrp_screen = fields.Boolean(string='Screen')
-	mrp_cc_qty = fields.Char(string='C.C Qty')
+	mrp_cc_qty = fields.Boolean(string='C.C Qty')
 	workbook_corrugation_ids = fields.One2many('workbook_corrugation_one','wrkbk_corrugation_id')
 	workbook_one_ids = fields.One2many('workbook_one','workbook_one_id')
 	workbook_two_ids = fields.One2many('workbook_two','workbook_two_id')
@@ -523,7 +495,6 @@ class workbook_four_paper_board(models.Model):
 	mrp_cutting = fields.Float(string='Cutting')
 	mrp_cut_width = fields.Float(string='Cut Width')
 	mrp_cut_height = fields.Float(string='Cut Height')
-	#mrp_cut_height_printed = fields.Float(string='Cut Height')
 	mrp_type = fields.Selection([
             ('a', 'Packets'),
             ('b', 'Sheet'),
